@@ -1,0 +1,45 @@
+<?import java.net.URL?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.safetytool.safetytool_fmeda.controller.BlockViewController">
+    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <top>
+            <VBox alignment="center">
+                <StackPane styleClass="header-pane">
+                    <!-- Add the label for the centered header -->
+                    <Label text="Blocks: List of All Blocks" styleClass="header-label"/>
+                </StackPane>
+                <Separator styleClass="separator" />
+                <StackPane maxWidth="800" styleClass="table-view">
+                    <TableView minHeight="150" fx:id="tableView"/>
+                </StackPane>
+            </VBox>
+        </top>
+
+        <!-- ... Other FXML code ... -->
+
+        <center>
+            <VBox styleClass="button-container" >
+                <!--                <Region VBox.vgrow="ALWAYS" />-->
+                <Button text="Export to Excel"  onAction="#exportToExcel" styleClass="export-button"/>
+            </VBox>
+        </center>
+
+        <!-- ... Other FXML code ... -->
+
+    </BorderPane>
+    <stylesheets>
+        <URL value="@../style/block-view-style.css" />
+    </stylesheets>
+</AnchorPane>

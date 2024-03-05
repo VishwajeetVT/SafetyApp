@@ -1,0 +1,40 @@
+/* styles.css */
+
+.header-pane {
+    -fx-alignment: center; /* Center the content horizontally in the StackPane */
+    -fx-padding: 10; /* Optional: Add padding for better appearance */
+}
+
+.header-label {
+    -fx-font-size: 24pt; /* Set the desired font size */
+    -fx-font-weight: bold; /* Optional: Set font weight */
+}
+
+.separator {
+    -fx-background-color: black;
+    -fx-pref-height: 2px;
+}
+
+.button-container {
+    -fx-alignment: CENTER_RIGHT;
+    -fx-spacing: 10;
+    -fx-padding: 0 10 10 0;
+}
+
+.export-button {
+    -fx-font-size: 14pt; /* Set the desired font size */
+    -fx-font-weight: bold; /* Optional: Set font weight */
+    -fx-text-fill: white; /* Set the text color */
+    -fx-background-color: #4CAF50; /* Set the background color */
+    -fx-border-radius: 5; /* Optional: Set border radius for rounded corners */
+    -fx-padding: 8 15; /* Set padding (top/bottom left/right) */
+}
+
+.export-button:hover {
+    -fx-background-color: #45a049; /* Change background color on hover */
+}
+
+.table-view {
+    -fx-padding: 10;
+    -fx-margin: 0 10 10 0;
+}
