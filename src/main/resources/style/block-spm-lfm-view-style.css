@@ -1,0 +1,15 @@
+/* styles.css */
+
+.select-block-button {
+    -fx-font-size: 14pt; /* Set the desired font size */
+    -fx-font-weight: bold; /* Optional: Set font weight */
+    -fx-text-fill: white; /* Set the text color */
+    -fx-background-color: #33AEAF; /* Set the background color */
+    -fx-border-radius: 5; /* Optional: Set border radius for rounded corners */
+    -fx-padding: 8 15; /* Set padding (top/bottom left/right) */
+}
+
+.select-block-button:hover {
+    -fx-background-color: derive(#33AEAF, 10%); /* Change background color on hover */
+}
+
