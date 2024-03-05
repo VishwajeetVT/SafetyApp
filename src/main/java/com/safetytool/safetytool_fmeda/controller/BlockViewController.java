@@ -1,5 +1,6 @@
 package com.safetytool.safetytool_fmeda.controller;
 
+import com.safetytool.safetytool_fmeda.util.ExcelExporter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -88,42 +89,6 @@ public class BlockViewController {
 
     @FXML
     private void exportToExcel() {
-        System.out.println("Export to Excel event");
-        try (Workbook workbook = new XSSFWorkbook()) {
-            Sheet sheet = workbook.createSheet("BlockData");
-
-            // Create header row
-            Row headerRow = sheet.createRow(0);
-            for (int i = 0; i < tableView.getColumns().size(); i++) {
-                Cell cell = headerRow.createCell(i);
-                cell.setCellValue(tableView.getColumns().get(i).getText());
-            }
-
-            // Populate data rows
-            for (int rowIndex = 0; rowIndex < tableView.getItems().size(); rowIndex++) {
-                Row dataRow = sheet.createRow(rowIndex + 1);
-
-                for (int colIndex = 0; colIndex < tableView.getColumns().size(); colIndex++) {
-                    Cell cell = dataRow.createCell(colIndex);
-                    cell.setCellValue(String.valueOf(tableView.getColumns().get(colIndex).getCellData(rowIndex)));
-                }
-            }
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save Excel File");
-            fileChooser.setInitialFileName("block_data.xlsx");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
-
-            File file = fileChooser.showSaveDialog(root.getScene().getWindow());
-
-            // Save the workbook to a file
-            try (FileOutputStream fileOut = new FileOutputStream(file)) {
-                workbook.write(fileOut);
-            }
-
-            System.out.println("Export to Excel successful!");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error exporting to Excel: " + e.getMessage());
-        }
+        ExcelExporter.exportToExcel(tableView, "block-view",root);
     }
 }
