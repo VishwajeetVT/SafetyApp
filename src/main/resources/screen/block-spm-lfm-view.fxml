@@ -4,10 +4,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+<?import java.lang.Double?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.safetytool.safetytool_fmeda.controller.Block_SPM_LFM_Controller"
-            fx:id="root">
+            fx:id="root" prefHeight="400" prefWidth="600">
     <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
             <VBox alignment="center">
@@ -22,8 +23,6 @@
             </VBox>
         </top>
 
-        <!-- ... Other FXML code ... -->
-
         <center>
             <VBox styleClass="button-container" >
                 <!--                <Region VBox.vgrow="ALWAYS" />-->
@@ -31,12 +30,15 @@
                 <Button text="Select Block #" onAction="#selectBlock" styleClass="select-block-button" />
             </VBox>
         </center>
-<bottom> <Button text="Navigate to Another Screen" onAction="#navigateToAnotherScreen" fx:id="btnNavigate"/></bottom>
-        <!-- ... Other FXML code ... -->
+
+        <bottom>
+            <Button text="Navigate to Another Screen" onAction="#navigateToAnotherScreen" fx:id="btnNavigate"/>
+        </bottom>
 
     </BorderPane>
     <stylesheets>
         <URL value="@../style/block-view-style.css" />
         <URL value="@../style/block-spm-lfm-view-style.css"/>
     </stylesheets>
+
 </AnchorPane>

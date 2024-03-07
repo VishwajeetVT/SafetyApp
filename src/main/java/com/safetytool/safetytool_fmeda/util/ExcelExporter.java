@@ -47,11 +47,19 @@ public class ExcelExporter {
             File file = fileChooser.showSaveDialog(root.getScene().getWindow());
 
             // Save the workbook to a file
-            try (FileOutputStream fileOut = new FileOutputStream(file)) {
-                workbook.write(fileOut);
+            if (file == null) {
+                System.out.println("Export to Excel canceled by the user.");
+                return;
             }
 
-            System.out.println("Export to Excel successful!");
+            // Save the workbook to a file
+            try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                workbook.write(fileOut);
+                System.out.println("Export to Excel successful!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("Error exporting to Excel: " + e.getMessage());
+            }
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error exporting to Excel: " + e.getMessage());

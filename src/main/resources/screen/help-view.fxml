@@ -1,0 +1,24 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.safetytool.safetytool_fmeda.controller.HelpController"
+            fx:id="root" prefWidth="600" prefHeight="600">
+
+    <VBox alignment="CENTER" spacing="10">
+        <Label text="Safety Tool Help" styleClass="header-label"/>
+        <Label text="Welcome to the Safety Tool - FMEDA Help screen. Here, you can provide instructions and information about using the application."/>
+        <!-- Add more labels or components as needed -->
+
+        <Label text="For further assistance, contact cloudteam@vervetronics.com" styleClass="footer-label"/>
+    </VBox>
+
+    <!-- ... Other FXML code ... -->
+
+    <stylesheets>
+        <URL value="@../style/block-view-style.css" />
+    </stylesheets>
+</AnchorPane>
