@@ -50,6 +50,16 @@
                             <MenuItem mnemonicParsing="false" text="Help" onAction="#getAboutHelp"/>
                         </items>
                     </Menu>
+                    <Menu text="Test">
+                        <Menu text="TESTING" >
+                        <MenuItem text="TEST 1" />
+                        <MenuItem text="TEST 2" />
+                        </Menu>
+                        <Menu text="RESTING" >
+                            <MenuItem text="REST 1" onAction="#getAboutHelp"/>
+                            <MenuItem text="REST 2" />
+                        </Menu>
+                    </Menu>
                 </menus>
             </MenuBar>
             </top>

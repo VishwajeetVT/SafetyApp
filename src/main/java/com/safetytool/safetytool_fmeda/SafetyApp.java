@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -31,8 +32,8 @@ public class SafetyApp extends Application {
         rootLayoutController.setRootLayoutController();
 
 
-
-
+        Image logo = new Image(getClass().getResourceAsStream("/images/logo.jpg"));
+        stage.getIcons().add(logo);
 
 
 

@@ -91,6 +91,7 @@ public class RootLayoutController {
     @FXML
     public void getComponentsBOM_Import(){
         System.out.println("In the BOM Import Item from Components");
+        StageUtil.openStage("/screen/components-bom-view.fxml", menuBar, "Components BOM");
     }
 
     @FXML
@@ -106,7 +107,7 @@ public class RootLayoutController {
     @FXML
     public void getAboutHelp(){
         System.out.println("In the Help Item from About");
-        StageUtil.openStage("/screen/help-view.fxml",menuBar,"Help");
+        StageUtil.openPopup("/screen/help-view.fxml",menuBar,"Help");
     }
 
 
