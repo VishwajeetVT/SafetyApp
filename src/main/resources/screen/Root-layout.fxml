@@ -6,6 +6,11 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TreeView?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
 <AnchorPane id="AnchorPane" fx:id="root" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.safetytool.safetytool_fmeda.controller.RootLayoutController" >
     <children>
         <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0">
@@ -63,9 +68,21 @@
                 </menus>
             </MenuBar>
             </top>
+            <center>
+                <SplitPane dividerPositions="0.2" styleClass="split-pane" fx:id="splitPane">
+                    <TreeView minWidth="200" maxWidth="400" fx:id="folderTreeView" id="folderTreeView"/>
+<!--                    <TableView fx:id="mainTableView"/>-->
+<!--                    <TextArea fx:id="textArea" />-->
+                    <Pane fx:id="drawingPane" />
+                </SplitPane>
+            </center>
         </BorderPane>
     </children>
 
+
+    <stylesheets>
+        <URL value="@../style/root-layout-style.css" />
+    </stylesheets>
 
 
 </AnchorPane>

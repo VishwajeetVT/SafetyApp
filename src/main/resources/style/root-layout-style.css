@@ -1,0 +1,17 @@
+/* styles.css */
+
+/* Style the SplitPane and its content */
+.split-pane {
+    -fx-background-color: #E0E0E0; /* Set background color */
+}
+
+/* Style the divider handle */
+.split-pane > * > .split-pane-divider {
+    -fx-background-color: #757575; /* Set divider color */
+}
+
+/* Style the TreeView */
+#folderTreeView {
+    -fx-border-color: #757575; /* Set border color */
+    -fx-border-width: 0 1 0 0; /* Set border width (right side only) */
+}

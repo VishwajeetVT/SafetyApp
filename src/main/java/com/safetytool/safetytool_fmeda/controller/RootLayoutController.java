@@ -1,24 +1,84 @@
 package com.safetytool.safetytool_fmeda.controller;
 
 import com.safetytool.safetytool_fmeda.util.StageUtil;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class RootLayoutController {
+public class RootLayoutController implements Initializable {
 
     @FXML
     private AnchorPane root;
 
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private SplitPane splitPane;
+    @FXML
+    private TreeView<String> folderTreeView;
+    @FXML
+    private TableView<?> mainTableView;
+
+    @FXML
+    private TextArea textArea;
+    @FXML
+    private Pane drawingPane;
+    private double initialX;
+    private double initialY;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<SplitPane.Divider> dividers = splitPane.getDividers();
+        this.mainTableView = new TableView<>();
+        this.textArea = new TextArea();
+        drawingPane.setOnMousePressed(this::handleMousePressed);
+        drawingPane.setOnMouseDragged(this::handleMouseDragged);
+        if (!dividers.isEmpty()) {
+            dividers.get(0).positionProperty().bindBidirectional(folderTreeView.prefWidthProperty());
+        }
+    }
+
+    private void handleMousePressed(MouseEvent event){
+        initialX = event.getX();
+        initialY = event.getY();
+    }
+    private void handleMouseDragged(MouseEvent event) {
+        double currentX = event.getX();
+        double currentY = event.getY();
+
+        double width = Math.abs(currentX - initialX);
+        double height = Math.abs(currentY - initialY);
+
+        if (event.isControlDown()) {
+            // Draw a circle
+            Circle circle = new Circle(initialX, initialY, Math.min(width, height));
+            circle.setFill(Color.BLUE);
+            drawingPane.getChildren().add(circle);
+        } else {
+            // Draw a rectangle
+            Rectangle rectangle = new Rectangle(initialX, initialY, width, height);
+            rectangle.setFill(Color.RED);
+            drawingPane.getChildren().add(rectangle);
+        }
+    }
 
     public void setRootLayoutController(){
 
@@ -109,8 +169,5 @@ public class RootLayoutController {
         System.out.println("In the Help Item from About");
         StageUtil.openPopup("/screen/help-view.fxml",menuBar,"Help");
     }
-
-
-
 
 }
