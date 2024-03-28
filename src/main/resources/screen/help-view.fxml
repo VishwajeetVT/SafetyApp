@@ -6,7 +6,8 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.safetytool.safetytool_fmeda.controller.HelpController"
-            fx:id="root" prefWidth="600" prefHeight="600">
+            fx:id="root"  prefHeight="600" prefWidth="800"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
     <VBox alignment="CENTER" spacing="10">
         <Label text="Safety Tool Help" styleClass="header-label"/>

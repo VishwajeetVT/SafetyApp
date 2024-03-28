@@ -1,50 +1,41 @@
 package com.safetytool.safetytool_fmeda.util;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
 import java.io.IOException;
 
 public class StageUtil {
 
-    public static void openStage(String fxmlPath, Parent parent, String title) {
-        openStage(fxmlPath, parent, title, StageStyle.DECORATED);
+    private static TabPane fileContainer;
+
+    public static void setFileContainer(TabPane container) {
+        fileContainer = container;
     }
 
-    public static void openPopup(String fxmlPath, Parent parent, String title) {
-        openStage(fxmlPath, parent, title, StageStyle.UTILITY);
-    }
+    public static void openScreen(String fxmlPath, String title) {
+        // Check if a tab with the same content already exists
+        for (Tab tab : fileContainer.getTabs()) {
+            FXMLLoader loader = (FXMLLoader) tab.getContent().getUserData();
+            if (loader != null && loader.getLocation().toString().equals(StageUtil.class.getResource(fxmlPath).toString())) {
+                fileContainer.getSelectionModel().select(tab); // Select the existing tab
+                return;
+            }
+        }
 
-    private static void openStage(String fxmlPath, Parent parent, String title, StageStyle stageStyle) {
+        // If no existing tab found, create a new one
         try {
             FXMLLoader loader = new FXMLLoader(StageUtil.class.getResource(fxmlPath));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-
-            // Set the stage style
-            stage.initStyle(stageStyle);
-
-            // Set application logo
-            Image logo = new Image(StageUtil.class.getResourceAsStream("/images/logo.jpg"));
-            stage.getIcons().add(logo);
-
-            stage.setTitle(title);
-            stage.initOwner(parent.getScene().getWindow());
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            if (stageStyle == StageStyle.UTILITY) {
-                stage.initModality(Modality.APPLICATION_MODAL);
-            }
-
-            stage.show();
+            Tab tab = new Tab(title);
+            tab.setContent(loader.load());
+            // Set user data to hold the FXMLLoader instance for comparison
+            tab.getContent().setUserData(loader);
+            fileContainer.getTabs().add(tab);
+            fileContainer.getSelectionModel().select(tab); // Select the newly opened tab
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

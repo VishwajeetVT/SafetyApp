@@ -1,5 +1,6 @@
 package com.safetytool.safetytool_fmeda.controller;
 
+import com.safetytool.safetytool_fmeda.util.FolderExplorer;
 import com.safetytool.safetytool_fmeda.util.StageUtil;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,12 +12,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -40,6 +43,10 @@ public class RootLayoutController implements Initializable {
     private TextArea textArea;
     @FXML
     private Pane drawingPane;
+    @FXML
+    private TabPane fileContainer;
+    private FolderExplorer folderExplorer;
+    private File selectedFile;
     private double initialX;
     private double initialY;
 
@@ -49,8 +56,13 @@ public class RootLayoutController implements Initializable {
         ObservableList<SplitPane.Divider> dividers = splitPane.getDividers();
         this.mainTableView = new TableView<>();
         this.textArea = new TextArea();
-        drawingPane.setOnMousePressed(this::handleMousePressed);
-        drawingPane.setOnMouseDragged(this::handleMouseDragged);
+        StageUtil.setFileContainer(fileContainer);
+        this.folderExplorer = new FolderExplorer(folderTreeView);
+
+
+
+//        drawingPane.setOnMousePressed(this::handleMousePressed);
+//        drawingPane.setOnMouseDragged(this::handleMouseDragged);
         if (!dividers.isEmpty()) {
             dividers.get(0).positionProperty().bindBidirectional(folderTreeView.prefWidthProperty());
         }
@@ -84,36 +96,67 @@ public class RootLayoutController implements Initializable {
 
     }
 
+    @FXML
+    private void openFolderStructure(){
+        folderExplorer.selectAndDisplayFolder();
+    }
+
+    @FXML
+    private void onTreeViewMouseClicked() {
+        TreeItem<String> selectedItem = folderTreeView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null && selectedItem.isLeaf()) {
+            String fileName = selectedItem.getValue();
+            File rootDirectory = folderExplorer.getSelectedDirectory();
+            if (rootDirectory != null) {
+                String fullPath = rootDirectory.getAbsolutePath() + File.separator + constructPath(selectedItem);
+                if (fileName.endsWith(".fxml")) {
+                    StageUtil.openScreen(constructPath(selectedItem), selectedItem.getValue());
+                } else {
+                    // Show a message if the file format is not supported
+                    showAlert("Unsupported File Format", "Selected file format is not supported.");
+                }
+                // Update the selectedFile field
+                selectedFile = new File(fullPath);
+            } else {
+                showAlert("Error","Root directory is not selected");
+            }
+        }
+    }
+    private String constructPath(TreeItem<String> item) {
+        StringBuilder path = new StringBuilder(item.getValue());
+        TreeItem<String> parent = item.getParent();
+        while (parent != null && !parent.getValue().equals("screen")) {
+            path.insert(0, "/");
+            path.insert(0, parent.getValue());
+            parent = parent.getParent();
+        }
+        if (parent != null && parent.getValue().equals("screen")) {
+            path.insert(0, "/screen/");
+        }
+        return path.toString();
+    }
+
+
+
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
     @FXML
     public void getSystemSGs(){
         System.out.println("In the SGs Menu Item from System");
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screen/block-view.fxml"));
-//            Parent blockViewScreen = loader.load();
-//
-//            blockViewScreen.prefHeight(800);
-//            blockViewScreen.prefWidth(600);
-//
-//            Stage stage = new Stage();
-//            stage.setTitle("Block View");
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.initOwner(menuBar.getScene().getWindow());
-//            Scene scene = new Scene(blockViewScreen);
-//            stage.setScene(scene);
-//            stage.showAndWait();
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
-
-        StageUtil.openStage("/screen/block-view.fxml", root,"Block View");
+        StageUtil.openScreen("/screen/block-view.fxml","Block View");
     }
 
     @FXML
     public void getSystemSMs(){
         System.out.println("In the SMs Menu Item from System");
-        StageUtil.openStage("/screen/block-spm-lfm-view.fxml", menuBar,"Block SPM/LFM");
-
+        StageUtil.openScreen("/screen/block-spm-lfm-view.fxml","Block SPM LFM");
     }
     @FXML
     public void getSystemRBD(){
@@ -151,7 +194,8 @@ public class RootLayoutController implements Initializable {
     @FXML
     public void getComponentsBOM_Import(){
         System.out.println("In the BOM Import Item from Components");
-        StageUtil.openStage("/screen/components-bom-view.fxml", menuBar, "Components BOM");
+        //StageUtil.openStage("/screen/components-bom-view.fxml", menuBar, "Components BOM");
+        StageUtil.openScreen("/screen/components-bom-view.fxml","Components BOM");
     }
 
     @FXML
@@ -167,7 +211,7 @@ public class RootLayoutController implements Initializable {
     @FXML
     public void getAboutHelp(){
         System.out.println("In the Help Item from About");
-        StageUtil.openPopup("/screen/help-view.fxml",menuBar,"Help");
+        StageUtil.openScreen("/screen/help-view.fxml","About");
     }
 
 }

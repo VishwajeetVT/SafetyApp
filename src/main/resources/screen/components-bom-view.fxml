@@ -7,17 +7,18 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.safetytool.safetytool_fmeda.controller.ComponentBOM_Controller"
-            fx:id="root" prefHeight="650"  prefWidth="600">
+            fx:id="root"  prefHeight="600" prefWidth="800"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
             <VBox alignment="center">
-                <StackPane styleClass="header-pane">
+                <StackPane styleClass="header-pane" VBox.vgrow="ALWAYS">
                     <!-- Add the label for the centered header -->
                     <Label text="Components: BOM" styleClass="header-label"/>
                 </StackPane>
                 <Separator styleClass="separator" />
-                <StackPane maxWidth="800" styleClass="table-view">
-                    <TableView minHeight="250" minWidth="600" fx:id="tableView"/>
+                <StackPane VBox.vgrow="ALWAYS" styleClass="table-view">
+                    <TableView minHeight="150" fx:id="tableView"/>
                 </StackPane>
             </VBox>
         </top>

@@ -7,19 +7,21 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.safetytool.safetytool_fmeda.controller.BlockViewController"
-            fx:id="root">
-    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            fx:id="root" prefWidth="800" prefHeight="600"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <BorderPane  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
-            <VBox alignment="center">
+            <VBox alignment="center" VBox.vgrow="ALWAYS">
                 <StackPane styleClass="header-pane">
                     <!-- Add the label for the centered header -->
                     <Label text="Blocks: List of All Blocks" styleClass="header-label"/>
                 </StackPane>
                 <Separator styleClass="separator" />
-                <StackPane maxWidth="800" styleClass="table-view">
+                <StackPane VBox.vgrow="ALWAYS" styleClass="table-view">
                     <TableView minHeight="150" fx:id="tableView"/>
                 </StackPane>
             </VBox>
+
         </top>
 
         <!-- ... Other FXML code ... -->

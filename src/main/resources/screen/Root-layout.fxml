@@ -11,43 +11,46 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TabPane?>
 <AnchorPane id="AnchorPane" fx:id="root" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.safetytool.safetytool_fmeda.controller.RootLayoutController" >
     <children>
         <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0">
             <top>
             <MenuBar fx:id="menuBar">
                 <menus>
+                    <Menu mnemonicParsing="false" text="File">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="New Project" />
+                            <SeparatorMenuItem mnemonicParsing="false" />
+                            <MenuItem mnemonicParsing="false" text="Open Existing Project" onAction="#openFolderStructure"/>
+                            <SeparatorMenuItem mnemonicParsing="false"/>
+                            <MenuItem mnemonicParsing="false" text="Exit" />
+                        </items>
+                    </Menu>
                     <Menu mnemonicParsing="false" text="System">
                         <items>
                             <MenuItem mnemonicParsing="false" text="SGs" onAction="#getSystemSGs" />
                             <SeparatorMenuItem mnemonicParsing="false"  />
                             <MenuItem mnemonicParsing="false" text="SMs" onAction="#getSystemSMs" />
                             <SeparatorMenuItem mnemonicParsing="false" />
-                            <MenuItem mnemonicParsing="false" text="RBD" onAction="#getSystemRBD" />
-                            <SeparatorMenuItem mnemonicParsing="false" />
                             <MenuItem mnemonicParsing="false" text="Reports" onAction="#getSystemReports"/>
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Blocks">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="SMs" onAction="#getBlockSMs"/>
+                            <MenuItem mnemonicParsing="false" text="List all Blocks" onAction="#getBlockSMs"/>
                             <SeparatorMenuItem mnemonicParsing="false" />
-                            <MenuItem mnemonicParsing="false" text="Components" onAction="#getBlockComponents" />
-                            <SeparatorMenuItem mnemonicParsing="false" />
-                            <MenuItem mnemonicParsing="false" text="Failure Modes" onAction="#getBlockFailureModes"/>
-                            <SeparatorMenuItem mnemonicParsing="false" />
-                            <MenuItem mnemonicParsing="false" text="FIT Rates" onAction="#getBlockFIT_Rates" />
+                            <MenuItem mnemonicParsing="false" text="Block FMEDA" onAction="#getBlockComponents" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Components">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="Failure Modes" onAction="#getComponentsFailureModes"/>
+                            <MenuItem mnemonicParsing="false" text="BOM" onAction="#getComponentsBOM_Import"/>
                             <SeparatorMenuItem mnemonicParsing="false" />
-                            <MenuItem mnemonicParsing="false" text="BOM Import" onAction="#getComponentsBOM_Import"/>
-                            <SeparatorMenuItem mnemonicParsing="false" />
-                            <MenuItem mnemonicParsing="false" text="FIT Rates" onAction="#getComponentsFIT_Rates" />
-                            <SeparatorMenuItem mnemonicParsing="false" />
-                            <MenuItem mnemonicParsing="false" text="Temp Profile" onAction="#getComponentsTempProfile"/>
+                            <MenuItem mnemonicParsing="false" text="FIT Database" onAction="#getComponentsFIT_Rates" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="About">
@@ -55,25 +58,17 @@
                             <MenuItem mnemonicParsing="false" text="Help" onAction="#getAboutHelp"/>
                         </items>
                     </Menu>
-                    <Menu text="Test">
-                        <Menu text="TESTING" >
-                        <MenuItem text="TEST 1" />
-                        <MenuItem text="TEST 2" />
-                        </Menu>
-                        <Menu text="RESTING" >
-                            <MenuItem text="REST 1" onAction="#getAboutHelp"/>
-                            <MenuItem text="REST 2" />
-                        </Menu>
-                    </Menu>
                 </menus>
             </MenuBar>
             </top>
             <center>
+
                 <SplitPane dividerPositions="0.2" styleClass="split-pane" fx:id="splitPane">
-                    <TreeView minWidth="200" maxWidth="400" fx:id="folderTreeView" id="folderTreeView"/>
-<!--                    <TableView fx:id="mainTableView"/>-->
-<!--                    <TextArea fx:id="textArea" />-->
-                    <Pane fx:id="drawingPane" />
+                    <TreeView minWidth="200" maxWidth="400" fx:id="folderTreeView" id="folderTreeView" onMouseClicked="#onTreeViewMouseClicked"/>
+                    <!-- TextArea for displaying file content or TableView if you prefer -->
+                    <TabPane fx:id="fileContainer">
+                        <!-- Tabs will be dynamically added here -->
+                    </TabPane>
                 </SplitPane>
             </center>
         </BorderPane>
