@@ -23,11 +23,11 @@
                 <menus>
                     <Menu mnemonicParsing="false" text="File">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="New Project" />
+                            <MenuItem mnemonicParsing="false" text="New Project" onAction="#newProject"/>
                             <SeparatorMenuItem mnemonicParsing="false" />
                             <MenuItem mnemonicParsing="false" text="Open Existing Project" onAction="#openFolderStructure"/>
                             <SeparatorMenuItem mnemonicParsing="false"/>
-                            <MenuItem mnemonicParsing="false" text="Exit" />
+                            <MenuItem mnemonicParsing="false" text="Exit" onAction="#onExit" />
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="System">

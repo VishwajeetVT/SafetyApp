@@ -3,6 +3,7 @@ package com.safetytool.safetytool_fmeda.controller;
 import com.safetytool.safetytool_fmeda.util.FolderExplorer;
 import com.safetytool.safetytool_fmeda.util.StageUtil;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RootLayoutController implements Initializable {
@@ -35,7 +37,7 @@ public class RootLayoutController implements Initializable {
     @FXML
     private SplitPane splitPane;
     @FXML
-    private TreeView<String> folderTreeView;
+    public TreeView<String> folderTreeView;
     @FXML
     private TableView<?> mainTableView;
 
@@ -58,6 +60,7 @@ public class RootLayoutController implements Initializable {
         this.textArea = new TextArea();
         StageUtil.setFileContainer(fileContainer);
         this.folderExplorer = new FolderExplorer(folderTreeView);
+        this.folderTreeView = new TreeView<>();
 
 
 
@@ -97,10 +100,28 @@ public class RootLayoutController implements Initializable {
     }
 
     @FXML
+    private void newProject(){
+        StageUtil.openPopupScreen("/screen/new-project-view.fxml", this);
+    }
+
+    @FXML
     private void openFolderStructure(){
         folderExplorer.selectAndDisplayFolder();
     }
+    @FXML
+    private void onExit(ActionEvent event){
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+        a.setHeaderText("Do you want to exit Application?");
+        a.initOwner(root.getScene().getWindow());
+        Optional<ButtonType> result = a.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            quite();
+        }
+    }
 
+    public void updateTreeViewWithNewProject(File projectName){
+       folderExplorer.displayFolderContent(projectName);
+    }
     @FXML
     private void onTreeViewMouseClicked() {
         TreeItem<String> selectedItem = folderTreeView.getSelectionModel().getSelectedItem();
@@ -214,4 +235,8 @@ public class RootLayoutController implements Initializable {
         StageUtil.openScreen("/screen/help-view.fxml","About");
     }
 
+
+    private void quite() {
+        System.exit(0);
+    }
 }
