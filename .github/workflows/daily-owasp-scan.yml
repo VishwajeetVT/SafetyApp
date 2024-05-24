@@ -1,9 +1,8 @@
 name: Periodic OWASP Scan
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '*/2 * * * *' # Runs the job every 2 minutes
+    - cron: '* * * * *' # Runs the job every 2 minutes
 
 jobs:
   job1:
