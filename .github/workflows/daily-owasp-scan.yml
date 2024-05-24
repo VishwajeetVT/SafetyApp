@@ -1,6 +1,7 @@
 name: Daily OWASP Scan
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/2 * * * *'
 # Runs the job every minute
