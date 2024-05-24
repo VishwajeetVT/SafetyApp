@@ -2,7 +2,8 @@ name: Daily OWASP Scan
 
 on:
   schedule:
-    - cron: '* * * * *' # Runs the job every minute
+    - cron: '*/2 * * * *'
+# Runs the job every minute
 
 jobs:
   owasp_scan:
