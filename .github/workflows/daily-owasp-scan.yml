@@ -1,9 +1,6 @@
 name: Daily OWASP Scan
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '* * * * *' # Runs the job every minute
 
