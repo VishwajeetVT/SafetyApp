@@ -6,29 +6,7 @@ on:
     - cron: '*/2 * * * *' # Runs the job every 2 minutes
 
 jobs:
-  owasp_scan:
+  job1:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Java
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-
-      - name: Run OWASP Scan
-        run: make owaspScan
-
-      - name: Wait for 2 minutes
-        run: sleep 120
-        if: github.event_name == 'workflow_dispatch' # Skip waiting if triggered by schedule
-
-      - name: Rerun workflow
-        if: github.event_name == 'workflow_dispatch' # Only rerun if triggered manually
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.PAT }}
-          repository: ${{ github.repository }}
-          event-type: 'workflow_dispatch'
+      - run: echo "This job always fails"
